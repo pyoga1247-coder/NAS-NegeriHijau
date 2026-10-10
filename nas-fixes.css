@@ -1,0 +1,970 @@
+/* ============================================================
+   NAS NegeriHijau – QA Fixes
+   Author: Kiro QA Engineer
+   Date: 2026-10-04
+   ============================================================ */
+
+/* -------------------------------------------------------
+   1. HERO SLIDER – Font size terlalu besar (80px → 52px)
+      Lebih proporsional, tidak overflow di layar 1024px
+   ------------------------------------------------------- */
+.elementor-27530 .elementor-element.elementor-element-c6c6a1f .title,
+.elementor-27554 .elementor-element.elementor-element-c6c6a1f .title,
+.elementor-27560 .elementor-element.elementor-element-c6c6a1f .title,
+.elementor-29451 .elementor-element.elementor-element-c6c6a1f .title {
+    font-size: 52px !important;
+    line-height: 1.15em !important;
+}
+
+@media (max-width: 1024px) {
+    .elementor-27530 .elementor-element.elementor-element-c6c6a1f .title,
+    .elementor-27554 .elementor-element.elementor-element-c6c6a1f .title,
+    .elementor-27560 .elementor-element.elementor-element-c6c6a1f .title,
+    .elementor-29451 .elementor-element.elementor-element-c6c6a1f .title {
+        font-size: 38px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .elementor-27530 .elementor-element.elementor-element-c6c6a1f .title,
+    .elementor-27554 .elementor-element.elementor-element-c6c6a1f .title,
+    .elementor-27560 .elementor-element.elementor-element-c6c6a1f .title,
+    .elementor-29451 .elementor-element.elementor-element-c6c6a1f .title {
+        font-size: 26px !important;
+    }
+}
+
+/* -------------------------------------------------------
+   2. SLIDE 2 – Gambar portrait (1024x1536) perlu di-crop
+      supaya tidak merusak layout landscape slider
+   ------------------------------------------------------- */
+#slide-27554 .wd-image img,
+.elementor-27554 .elementor-element-1a3c897 img {
+    width: 100% !important;
+    height: 500px !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    max-width: 100% !important;
+}
+
+@media (max-width: 768px) {
+    #slide-27554 .wd-image img,
+    .elementor-27554 .elementor-element-1a3c897 img {
+        height: 280px !important;
+    }
+}
+
+/* -------------------------------------------------------
+   3. SLIDE 3 – Proporsi teks 33% vs image 81% tidak balance
+      Kurangi lebar image, beri ruang teks lebih
+   ------------------------------------------------------- */
+@media (min-width: 769px) {
+    .elementor-27560 .elementor-element.elementor-element-d105641 {
+        --width: 42% !important;
+    }
+    .elementor-27560 .elementor-element.elementor-element-1a3c897 {
+        --width: 55% !important;
+    }
+}
+
+/* -------------------------------------------------------
+   4. PRODUCT CARD – content-product-imagin margin negatif
+      yang menyebabkan card overlap/geser tidak karuan
+   ------------------------------------------------------- */
+.content-product-imagin {
+    margin-bottom: 0 !important;
+}
+
+/* -------------------------------------------------------
+   5. PRODUCT DESCRIPTION – ChatGPT thread UI markup
+      yang ikut tercopy, sembunyikan elemen-elemen UI-nya
+   ------------------------------------------------------- */
+.hover-content-inner .text-base,
+.hover-content-inner [class*="thread-content"],
+.hover-content-inner [class*="turn-messages"],
+.hover-content-inner .z-0.flex.min-h-\[46px\],
+.hover-content-inner [data-message-author-role="assistant"] > .flex.w-full.flex-col.gap-1.empty\:hidden > .markdown {
+    /* biarkan konten teks tetap tampil, hanya hilangkan wrapper ChatGPT */
+}
+
+/* Hapus padding/margin berlebih dari wrapper ChatGPT */
+.hover-content-inner .text-base.my-auto {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+}
+
+.hover-content-inner [class*="mx-auto"][class*="max-w-"] {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.hover-content-inner .z-0.flex.min-h-\[46px\] {
+    display: none !important;
+}
+
+/* -------------------------------------------------------
+   6. BANNER SECTION – Banner 512x512 square di layout
+      landscape: beri aspect ratio konsisten
+   ------------------------------------------------------- */
+.elementor-element-ac391c8 .banner-image img,
+.elementor-element-b112e75 .banner-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    aspect-ratio: 4/3 !important;
+}
+
+.elementor-element-ac391c8 .promo-banner,
+.elementor-element-b112e75 .promo-banner {
+    min-height: 200px !important;
+}
+
+/* -------------------------------------------------------
+   7. BANNER TITLE – "On our fingertip" dengan br berlebihan
+      Hilangkan spasi vertikal yang tidak perlu
+   ------------------------------------------------------- */
+.banner-title br + br {
+    display: none !important;
+}
+
+.banner-title {
+    line-height: 1.3 !important;
+}
+
+/* -------------------------------------------------------
+   8. SLIDER HERO – Height override yang terlalu rigid
+      Biarkan auto-height bekerja lebih natural
+   ------------------------------------------------------- */
+.wd-carousel-wrap {
+    height: auto !important;
+    min-height: 500px;
+}
+
+@media (max-width: 768px) {
+    .wd-carousel-wrap {
+        min-height: 350px !important;
+    }
+}
+
+/* -------------------------------------------------------
+   9. HERO SLIDER SECTION – Gambar hero slide 3 (1254x1254)
+      Ukuran terlalu besar, batasi max-height
+   ------------------------------------------------------- */
+#slide-27560 .wd-image img,
+.elementor-27560 .elementor-element-1a3c897 img {
+    max-height: 480px !important;
+    width: auto !important;
+    object-fit: contain !important;
+}
+
+/* -------------------------------------------------------
+   10. GENERAL IMAGE – Cegah gambar apapun overflow container
+   ------------------------------------------------------- */
+.wd-image img,
+.banner-image img,
+.product-image-link img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* Override khusus product card supaya tetap square */
+.product-image-link img,
+.hover-img img {
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    object-fit: cover !important;
+}
+
+/* -------------------------------------------------------
+   11. INFO BOX – Pastikan icon dan teks sejajar dengan baik
+       Perbaiki spacing yang tidak konsisten
+   ------------------------------------------------------- */
+.wd-info-box.box-icon-align-left {
+    align-items: flex-start !important;
+    gap: 12px !important;
+}
+
+.info-box-icon {
+    flex-shrink: 0 !important;
+}
+
+.info-box-content {
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+
+.info-box-title {
+    margin-bottom: 4px !important;
+    word-break: break-word !important;
+}
+
+/* -------------------------------------------------------
+   12. SECTION STRETCH – Negative gap fix
+       Mencegah konten terpotong atau overflow horizontal
+   ------------------------------------------------------- */
+.wd-negative-gap {
+    overflow: hidden !important;
+}
+
+/* Tapi jangan sembunyikan dropdown menu navigasi */
+.whb-header .wd-negative-gap,
+.wd-dropdown-menu {
+    overflow: visible !important;
+}
+
+/* -------------------------------------------------------
+   13. MAIN LARGE BANNER – ChatGPT-Image-Aug-27-2026-04_26_36
+       Batasi ukuran supaya tidak terlalu dominan
+   ------------------------------------------------------- */
+.elementor-element-e088708 .banner-image img {
+    max-height: 400px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+}
+
+/* -------------------------------------------------------
+   14. FULL-WIDTH IMAGE SECTION – ChatGPT-Image-Jun-15 (1774x887)
+       Gambar terlalu besar, batasi height
+   ------------------------------------------------------- */
+.elementor-element-b232606 .wd-image img {
+    width: 100% !important;
+    max-height: 500px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border-radius: 8px !important;
+}
+
+/* -------------------------------------------------------
+   15. MOBILE NAVIGATION – Pastikan hamburger menu terlihat
+   ------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .whb-mobile-left,
+    .whb-mobile-center,
+    .whb-hidden-lg {
+        display: flex !important;
+    }
+
+    .whb-visible-lg {
+        display: none !important;
+    }
+}
+
+/* -------------------------------------------------------
+   16. GENERAL TYPOGRAPHY – Perbaikan readability
+   ------------------------------------------------------- */
+.wd-text-block p {
+    line-height: 1.6 !important;
+    margin-bottom: 0.5em !important;
+}
+
+/* Subtitle text di slider jangan ALL CAPS berlebihan */
+.elementor-27560 .wd-text-block p {
+    text-transform: uppercase;
+    font-size: 14px !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* -------------------------------------------------------
+   17. PRODUCT GRID – Spacing antar card lebih konsisten
+   ------------------------------------------------------- */
+.wd-products.grid-columns-4 .wd-product {
+    margin-bottom: 20px !important;
+}
+
+.product-information {
+    padding-top: 10px !important;
+}
+
+/* -------------------------------------------------------
+   18. FOOTER – Pastikan tidak ada overflow
+   ------------------------------------------------------- */
+.wd-footer {
+    overflow: hidden !important;
+}
+
+/* -------------------------------------------------------
+   19. SCROLL TO TOP BUTTON – Pastikan posisi tidak overlap
+       dengan konten di mobile
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+    .wd-scroll-top-btn {
+        bottom: 70px !important;
+        right: 15px !important;
+    }
+}
+
+
+/* ============================================================
+   SIMPLIFIKASI SECTION "SOLUSI UTAMA KAMI"
+   Section dengan 8 kolom foto + icon + bullet list
+   ============================================================ */
+
+/* -----------------------------------------------------------
+   SECTION WRAPPER – kurangi padding berlebihan
+   ----------------------------------------------------------- */
+.elementor-element-f62e3d9 {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+}
+
+/* -----------------------------------------------------------
+   AGRI-TECH SERVICES TITLE – lebih compact
+   ----------------------------------------------------------- */
+.elementor-element-4b03424 .woodmart-title-container {
+    font-size: 22px !important;
+    margin-bottom: 20px !important;
+    letter-spacing: 1px !important;
+}
+
+/* -----------------------------------------------------------
+   INFO BOX ROW – layout lebih rapi, 3 kolom per baris
+   Alih-alih overflow dengan banyak kolom kecil
+   ----------------------------------------------------------- */
+.elementor-element-b888b0d,
+.elementor-element-541d392 {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px !important;
+}
+
+@media (max-width: 768px) {
+    .elementor-element-b888b0d,
+    .elementor-element-541d392 {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* -----------------------------------------------------------
+   SETIAP INFO BOX – card style yang bersih & simple
+   ----------------------------------------------------------- */
+.elementor-element-b888b0d .wd-info-box,
+.elementor-element-541d392 .wd-info-box {
+    background: #f8fdf8 !important;
+    border: 1px solid #e0f0e0 !important;
+    border-radius: 8px !important;
+    padding: 16px !important;
+    gap: 10px !important;
+    align-items: flex-start !important;
+}
+
+.elementor-element-b888b0d .info-box-icon img,
+.elementor-element-541d392 .info-box-icon img {
+    width: 36px !important;
+    height: 36px !important;
+}
+
+.elementor-element-b888b0d .info-box-title,
+.elementor-element-541d392 .info-box-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #2a7a2a !important;
+    margin-bottom: 4px !important;
+}
+
+.elementor-element-b888b0d .info-box-inner p,
+.elementor-element-541d392 .info-box-inner p {
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    color: #555 !important;
+    margin: 0 !important;
+}
+
+/* -----------------------------------------------------------
+   GALLERY CAROUSEL – section di atas (foto-foto besar)
+   Kurangi height, beri padding lebih kecil
+   ----------------------------------------------------------- */
+.elementor-element-1e99d7f {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+}
+
+.elementor-element-608dcfd .wd-gallery-item img {
+    height: 200px !important;
+    object-fit: cover !important;
+    border-radius: 6px !important;
+}
+
+/* -----------------------------------------------------------
+   IMAGE PARALLAX SECTION – gambar besar ChatGPT-Aug-25
+   Batasi tinggi agar tidak terlalu dominan
+   ----------------------------------------------------------- */
+.elementor-element-8442dbe .wd-image img {
+    max-height: 350px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+}
+
+/* -----------------------------------------------------------
+   SECTION TITLE DECORATOR – panah kiri kanan di "SOLUSI UTAMA KAMI"
+   Sembunyikan jika hanya dekorasi tanpa fungsi
+   ----------------------------------------------------------- */
+.liner-continer::before,
+.liner-continer::after {
+    display: none !important;
+}
+
+
+/* ============================================================
+   NAS QA PATCH v2 — 2026-10-09
+   Bug fixes berdasarkan audit menyeluruh HTML + CSS
+   ============================================================ */
+
+/* -------------------------------------------------------
+   FIX #3 – HERO SLIDER TITLE 80px (inline style override)
+   Inline style di elementor menggunakan CSS custom property
+   --wd-title-font-size dan font-size langsung. Kita perlu
+   specificity yang lebih tinggi PLUS pakai !important pada
+   elemen .title di dalam setiap slide wrapper.
+   ------------------------------------------------------- */
+#slide-27530 .woodmart-title-container.title,
+#slide-27530 .title-wrapper .title {
+    font-size: 52px !important;
+    line-height: 1.15em !important;
+}
+#slide-27554 .woodmart-title-container.title,
+#slide-27554 .title-wrapper .title {
+    font-size: 52px !important;
+    line-height: 1.15em !important;
+}
+#slide-27560 .woodmart-title-container.title,
+#slide-27560 .title-wrapper .title {
+    font-size: 52px !important;
+    line-height: 1.15em !important;
+}
+#slide-29451 .woodmart-title-container.title,
+#slide-29451 .title-wrapper .title {
+    font-size: 52px !important;
+    line-height: 1.15em !important;
+}
+
+@media (max-width: 1024px) {
+    #slide-27530 .woodmart-title-container.title,
+    #slide-27530 .title-wrapper .title,
+    #slide-27554 .woodmart-title-container.title,
+    #slide-27554 .title-wrapper .title,
+    #slide-27560 .woodmart-title-container.title,
+    #slide-27560 .title-wrapper .title,
+    #slide-29451 .woodmart-title-container.title,
+    #slide-29451 .title-wrapper .title {
+        font-size: 36px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #slide-27530 .woodmart-title-container.title,
+    #slide-27530 .title-wrapper .title,
+    #slide-27554 .woodmart-title-container.title,
+    #slide-27554 .title-wrapper .title,
+    #slide-27560 .woodmart-title-container.title,
+    #slide-27560 .title-wrapper .title,
+    #slide-29451 .woodmart-title-container.title,
+    #slide-29451 .title-wrapper .title {
+        font-size: 26px !important;
+    }
+}
+
+/* -------------------------------------------------------
+   FIX #2 – SLIDE 3 COLUMN WIDTH 33% + 81% = 114% overflow
+   d105641 = text column, 1a3c897 = image column
+   Paksa total tidak melebihi 100% dengan max-width
+   ------------------------------------------------------- */
+@media (min-width: 769px) {
+    /* Slide 3 text column: kurangi dari 33% ke 38% agar proporsional */
+    #slide-27560 .elementor-element-d105641 {
+        --width: 38% !important;
+        max-width: 38% !important;
+        flex: 0 0 38% !important;
+    }
+    /* Slide 3 image column: dari 81% ke 58% agar total ~96% */
+    #slide-27560 .elementor-element-1a3c897 {
+        --width: 58% !important;
+        max-width: 58% !important;
+        flex: 0 0 58% !important;
+    }
+}
+
+/* -------------------------------------------------------
+   FIX #4 & #6 – BANNER 512x512 DAN SLIDE 1 MIN-HEIGHT 834px
+   Banner square (ac391c8, b112e75) di dalam row landscape:
+   paksa aspect ratio 4:3 konsisten dan batasi height.
+   Slide 1 image container terlalu tinggi (834px) → batasi.
+   ------------------------------------------------------- */
+
+/* Banner 512x512 square fix */
+.elementor-element-ac391c8 .promo-banner,
+.elementor-element-b112e75 .promo-banner {
+    max-height: 280px !important;
+    overflow: hidden !important;
+}
+
+.elementor-element-ac391c8 .banner-image,
+.elementor-element-b112e75 .banner-image {
+    height: 280px !important;
+    overflow: hidden !important;
+}
+
+.elementor-element-ac391c8 .banner-image img,
+.elementor-element-b112e75 .banner-image img {
+    width: 100% !important;
+    height: 280px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+}
+
+/* Slide 1 image container min-height 834px terlalu tinggi */
+#slide-27530 .elementor-element-1a3c897 {
+    --min-height: 480px !important;
+    min-height: 480px !important;
+}
+
+/* Slide 4 image container min-height juga terlalu tinggi */
+#slide-29451 .elementor-element-d105641 {
+    --min-height: 400px !important;
+    min-height: 400px !important;
+}
+
+/* -------------------------------------------------------
+   FIX #5 – BANNER TITLE "On our fingertip" BR BERLEBIHAN
+   Sembunyikan br berlebihan dalam banner-title agar teks
+   tidak terlalu pendek per baris
+   ------------------------------------------------------- */
+.banner-title br {
+    display: none !important;
+}
+
+/* Tapi tetap beri line-break yang natural via white-space */
+.banner-title {
+    white-space: normal !important;
+    line-height: 1.3 !important;
+    word-break: break-word !important;
+}
+
+/* -------------------------------------------------------
+   FIX #7 – DUPLIKAT ICON (BEST QUALITY, MONITOR, SCALE
+   semua pakai electronics-2-best.svg)
+   Bedakan tampilan visual dengan tinted color overlay
+   supaya user setidaknya bisa membedakan masing-masing item
+   ------------------------------------------------------- */
+
+/* BEST QUALITY – icon tetap seperti aslinya (hijau) */
+.elementor-element-e56379f .info-box-icon img {
+    filter: hue-rotate(0deg) !important;
+}
+
+/* MONITOR – tint biru */
+.elementor-element-bf92c8e .info-box-icon img {
+    filter: hue-rotate(120deg) saturate(1.5) !important;
+}
+
+/* SCALE – tint oranye */
+.elementor-element-d8bbfd7 .info-box-icon img {
+    filter: hue-rotate(240deg) saturate(1.5) !important;
+}
+
+/* -------------------------------------------------------
+   FIX #8 – AGRI-TECH SERVICES: 6 INFO BOX DALAM FLEX ROW
+   Container b888b0d dan 541d392 masing-masing berisi 3 item
+   menggunakan flex. Pastikan wrap aktif dan tiap item
+   proporsional. Override grid jika masih bermasalah.
+   ------------------------------------------------------- */
+.elementor-element-b888b0d.e-con,
+.elementor-element-541d392.e-con {
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+}
+
+.elementor-element-b888b0d > .elementor-widget,
+.elementor-element-541d392 > .elementor-widget {
+    flex: 0 0 calc(33.33% - 12px) !important;
+    min-width: 200px !important;
+}
+
+@media (max-width: 1024px) {
+    .elementor-element-b888b0d > .elementor-widget,
+    .elementor-element-541d392 > .elementor-widget {
+        flex: 0 0 calc(50% - 12px) !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .elementor-element-b888b0d > .elementor-widget,
+    .elementor-element-541d392 > .elementor-widget {
+        flex: 0 0 100% !important;
+    }
+}
+
+/* -------------------------------------------------------
+   FIX TAMBAHAN – PRODUCT CARD: .content-product-imagin
+   Elemen ini adalah empty div tanpa konten yang menyebabkan
+   ghost space di atas product image. Hilangkan sepenuhnya.
+   ------------------------------------------------------- */
+.content-product-imagin {
+    display: none !important;
+}
+
+/* -------------------------------------------------------
+   FIX TAMBAHAN – SLIDE SECTION EMPTY (elementor-815e483)
+   Ada section kosong (empty container) yang menghasilkan
+   gap putih tak terduga di antara slider dan produk.
+   ------------------------------------------------------- */
+.elementor-element-815e483 {
+    display: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+    height: 0 !important;
+}
+
+/* -------------------------------------------------------
+   FIX TAMBAHAN – PRODUCT HOVER DESCRIPTION
+   Teks deskripsi produk di hover content terlihat terlalu
+   padat. Tambahkan max-height dengan scroll agar tidak
+   overflow keluar card.
+   ------------------------------------------------------- */
+.hover-content-inner.wd-more-desc-inner {
+    max-height: 120px !important;
+    overflow: hidden !important;
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%) !important;
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%) !important;
+}
+
+/* -------------------------------------------------------
+   FIX TAMBAHAN – CAROUSEL "Sale products" TERLALU SEMPIT
+   Highlighted product carousel hanya menampilkan 1 item
+   per view dengan lebar 460px. Di desktop semestinya 2.
+   ------------------------------------------------------- */
+@media (min-width: 1025px) {
+    #carousel-248 .wd-carousel {
+        --wd-col-lg: 2 !important;
+    }
+}
+
+/* -------------------------------------------------------
+   FIX TAMBAHAN – FOOTER overflow-hidden agar tidak muncul
+   scrollbar horizontal akibat section stretch
+   ------------------------------------------------------- */
+body {
+    overflow-x: hidden !important;
+}
+
+/* -------------------------------------------------------
+   FIX TAMBAHAN – BLOG POST IMAGE proporsi
+   Gambar artikel blog di carousel terlalu tinggi (1536x1024)
+   tanpa constraint, perlu dikunci aspect ratio konsisten
+   ------------------------------------------------------- */
+.wd-post-img img {
+    width: 100% !important;
+    height: 200px !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+}
+
+/* -------------------------------------------------------
+   FIX TAMBAHAN – BANNER ROW SECOND (ceaf741)
+   Banner baris kedua memiliki gambar landscape (1080x720)
+   dan potrait landscape campuran. Beri height seragam.
+   ------------------------------------------------------- */
+.elementor-element-ceaf741 .banner-image {
+    height: 300px !important;
+    overflow: hidden !important;
+}
+
+.elementor-element-ceaf741 .banner-image img {
+    width: 100% !important;
+    height: 300px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+}
+
+/* Banner baris pertama (851d205) height seragam */
+.elementor-element-851d205 .banner-image {
+    height: 300px !important;
+    overflow: hidden !important;
+}
+
+.elementor-element-851d205 .banner-image img {
+    width: 100% !important;
+    height: 300px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+}
+
+@media (max-width: 768px) {
+    .elementor-element-ceaf741 .banner-image,
+    .elementor-element-ceaf741 .banner-image img,
+    .elementor-element-851d205 .banner-image,
+    .elementor-element-851d205 .banner-image img {
+        height: 200px !important;
+    }
+}
+
+
+/* ============================================================
+   NAS QA PATCH v3 — SLIDER FIX (2026-10-09)
+   Masalah: Slide 1 kosong, Slide 2 teks terpotong, Slide 3 gambar kebesaran
+   ============================================================ */
+
+/* -------------------------------------------------------
+   SLIDE 1 – Background putih kosong karena URL online tidak load.
+   Paksa background warna hijau gelap + pastikan konten tampil.
+   Gambar hero di slide 1 sudah ada lokal: ChatGPT-Image-Aug-26-2026-06_48_28-AM-768x512.png
+   ------------------------------------------------------- */
+#slide-27530 .wd-slide-bg {
+    background-color: #1a3a1a !important;
+    background-image: url('ChatGPT-Image-Aug-26-2026-06_48_28-AM-768x512.png') !important;
+    background-size: cover !important;
+    background-position: center center !important;
+}
+
+/* Pastikan konten slide 1 terlihat (z-index dan visibility) */
+#slide-27530 .wd-slide-container,
+#slide-27530 .wd-slide-inner,
+#slide-27530 .elementor {
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+/* Teks slide 1 warna putih agar kontras dengan background gelap */
+#slide-27530 .wd-text-block p,
+#slide-27530 .woodmart-title-container.title,
+#slide-27530 .title-wrapper .title,
+#slide-27530 h2,
+#slide-27530 h4 {
+    color: #ffffff !important;
+}
+
+/* Slide 1 min-height agar ada ruang konten */
+#slide-27530 {
+    min-height: 500px !important;
+}
+
+/* -------------------------------------------------------
+   SLIDE 2 – Teks terpotong di atas gambar.
+   Masalah: margin-top: 100px pada container + image 1024x1536 (portrait)
+   terlalu tinggi sehingga mendorong teks keluar viewport.
+   Fix: kurangi margin top, batasi tinggi gambar portrait, beri padding.
+   ------------------------------------------------------- */
+
+/* Kurangi margin top container slide 2 */
+#slide-27554 .elementor-element-75e9c5d {
+    --margin-top: 0px !important;
+    margin-top: 0 !important;
+    padding-top: 30px !important;
+    align-items: flex-start !important;
+}
+
+/* Kolom teks slide 2: beri padding atas yang wajar */
+#slide-27554 .elementor-element-d105641 {
+    padding-top: 30px !important;
+    --padding-top: 30px !important;
+    justify-content: center !important;
+    --justify-content: center !important;
+}
+
+/* Gambar slide 2 portrait (1024x1536) — batasi tinggi max */
+#slide-27554 .elementor-element-1a3c897 img,
+#slide-27554 .wd-image img {
+    max-height: 420px !important;
+    width: auto !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+/* Container gambar slide 2 jangan overflow */
+#slide-27554 .elementor-element-1a3c897 {
+    overflow: hidden !important;
+    max-height: 480px !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+}
+
+/* Teks slide 2 pastikan tidak tertutup */
+#slide-27554 .woodmart-title-container.title,
+#slide-27554 .title-wrapper .title {
+    font-size: 40px !important;
+    line-height: 1.2em !important;
+    margin-bottom: 16px !important;
+}
+
+#slide-27554 .wd-text-block p {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    max-width: 480px !important;
+}
+
+/* -------------------------------------------------------
+   SLIDE 3 – Gambar kebesaran dan terpotong.
+   Gambar asli 1254x1254 (square besar) dengan container --width:81%
+   Fix: batasi gambar, sesuaikan proporsi kolom.
+   ------------------------------------------------------- */
+
+/* Gambar slide 3 — batasi ukuran dan jangan overflow */
+#slide-27560 .elementor-element-1a3c897 img,
+#slide-27560 .wd-image img {
+    max-height: 440px !important;
+    max-width: 100% !important;
+    width: auto !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+/* Container gambar slide 3 */
+#slide-27560 .elementor-element-1a3c897 {
+    overflow: hidden !important;
+    max-width: 55% !important;
+    --width: 55% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Kolom teks slide 3 */
+#slide-27560 .elementor-element-d105641 {
+    max-width: 42% !important;
+    --width: 42% !important;
+    padding-top: 20px !important;
+    --padding-top: 20px !important;
+}
+
+/* -------------------------------------------------------
+   SEMUA SLIDE – Fix umum agar konten tidak terpotong header
+   ------------------------------------------------------- */
+.wd-slide-container {
+    padding-top: 100px !important; /* memberi ruang header (90px tinggi) */
+    padding-bottom: 20px !important;
+    box-sizing: border-box !important;
+}
+
+/* Pastikan slide punya min-height yang cukup */
+.wd-slide {
+    min-height: 520px !important;
+}
+
+/* -------------------------------------------------------
+   SLIDE 4 (29451) – Samakan dengan slide 1 (design mirip)
+   ------------------------------------------------------- */
+#slide-29451 .wd-slide-bg {
+    background-color: #e8ede8 !important;
+}
+
+#slide-29451 .elementor-element-75e9c5d {
+    padding-top: 20px !important;
+}
+
+#slide-29451 .elementor-element-1a3c897 img,
+#slide-29451 .wd-image img {
+    max-height: 400px !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+}
+
+/* -------------------------------------------------------
+   RESPONSIVE – Mobile fix untuk semua slide
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+    .wd-slide-container {
+        padding-top: 80px !important;
+        padding-bottom: 10px !important;
+    }
+
+    #slide-27554 .elementor-element-1a3c897 img,
+    #slide-27554 .wd-image img {
+        max-height: 240px !important;
+    }
+
+    #slide-27560 .elementor-element-1a3c897 img,
+    #slide-27560 .wd-image img {
+        max-height: 240px !important;
+    }
+
+    #slide-27560 .elementor-element-1a3c897,
+    #slide-27560 .elementor-element-d105641 {
+        max-width: 100% !important;
+        --width: 100% !important;
+    }
+}
+
+
+/* ============================================================
+   NAS QA PATCH v4 — GALLERY SECTION FIX (2026-10-09)
+   Masalah: Gambar gallery carousel (section 1e99d7f) terlalu besar,
+   memenuhi layar dan tidak proporsional.
+   ============================================================ */
+
+/* -----------------------------------------------------------
+   GALLERY CAROUSEL WRAPPER — batasi tinggi keseluruhan section
+   ----------------------------------------------------------- */
+.elementor-element-1e99d7f {
+    max-height: 320px !important;
+    overflow: hidden !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* -----------------------------------------------------------
+   SETIAP ITEM GALLERY — ukuran gambar dikecilkan & konsisten
+   ----------------------------------------------------------- */
+.elementor-element-608dcfd .wd-gallery-item {
+    height: 220px !important;
+    overflow: hidden !important;
+}
+
+.elementor-element-608dcfd .wd-gallery-item img,
+.elementor-element-608dcfd .wd-carousel-item img {
+    width: 100% !important;
+    height: 220px !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    display: block !important;
+}
+
+/* -----------------------------------------------------------
+   PARALLAX IMAGE (8442dbe) di bawah gallery — gambar besar
+   NextSense greenhouse system — batasi tinggi max
+   ----------------------------------------------------------- */
+.elementor-element-8442dbe {
+    max-height: 380px !important;
+    overflow: hidden !important;
+}
+
+.elementor-element-8442dbe .wd-image {
+    max-height: 380px !important;
+    overflow: hidden !important;
+}
+
+.elementor-element-8442dbe .wd-image img {
+    width: 100% !important;
+    height: 380px !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+}
+
+/* -----------------------------------------------------------
+   RESPONSIVE
+   ----------------------------------------------------------- */
+@media (max-width: 768px) {
+    .elementor-element-1e99d7f {
+        max-height: 200px !important;
+    }
+    .elementor-element-608dcfd .wd-gallery-item,
+    .elementor-element-608dcfd .wd-gallery-item img,
+    .elementor-element-608dcfd .wd-carousel-item img {
+        height: 160px !important;
+    }
+    .elementor-element-8442dbe,
+    .elementor-element-8442dbe .wd-image,
+    .elementor-element-8442dbe .wd-image img {
+        max-height: 220px !important;
+        height: 220px !important;
+    }
+}

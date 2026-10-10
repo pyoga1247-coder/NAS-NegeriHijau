@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Akses Website NAS NegeriHijau</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f0f4f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 520px;
+    width: 90%;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    text-align: center;
+  }
+  .logo { font-size: 28px; font-weight: 800; color: #1a5c1a; margin-bottom: 6px; }
+  .logo span { color: #4caf50; }
+  .subtitle { color: #666; font-size: 13px; margin-bottom: 32px; }
+  .btn {
+    display: block; width: 100%; padding: 16px 20px;
+    border-radius: 10px; text-decoration: none;
+    font-weight: 700; font-size: 15px; margin-bottom: 14px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: pointer; border: none;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+  .btn-green { background: linear-gradient(135deg, #2e7d32, #4caf50); color: white; }
+  .btn-blue  { background: linear-gradient(135deg, #1565c0, #42a5f5); color: white; }
+  .btn-gray  { background: #f5f5f5; color: #333; border: 1px solid #ddd; font-size: 13px; padding: 12px 20px; }
+  .divider { border: none; border-top: 1px solid #eee; margin: 24px 0; }
+  .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #999; margin-bottom: 12px; }
+  .badge { display: inline-block; background: #e8f5e9; color: #2e7d32; border-radius: 20px; padding: 4px 12px; font-size: 11px; font-weight: 600; margin-bottom: 24px; }
+  .note { font-size: 12px; color: #888; margin-top: 20px; line-height: 1.6; }
+  .note b { color: #555; }
+  .files { background: #f9f9f9; border-radius: 8px; padding: 14px; text-align: left; margin-top: 20px; font-size: 12px; color: #555; line-height: 2; }
+  .files span { font-family: monospace; background: #eee; padding: 2px 6px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <div class="logo">N<span>A</span>S</div>
+  <div style="font-size:13px;color:#555;font-weight:600;margin-bottom:4px;">NegeriHijau Agriculture Solutions</div>
+  <div class="subtitle">Pilih cara akses yang kamu inginkan</div>
+
+  <div class="badge">✅ QA Fix sudah diterapkan</div>
+
+  <div class="label">🌐 Versi Online (Direkomendasikan)</div>
+  <a class="btn btn-green" href="https://negerihijau.com" target="_blank">
+    🌿 Buka negerihijau.com — Versi Live
+  </a>
+
+  <hr class="divider">
+
+  <div class="label">💻 Versi Lokal (dengan semua fix)</div>
+  <a class="btn btn-blue" href="index.html" target="_blank">
+    📄 Buka Website Lokal (index.html)
+  </a>
+
+  <hr class="divider">
+
+  <div class="label">📁 File CSS Fix</div>
+  <a class="btn btn-gray" href="assets/nas-fixes.css" target="_blank">
+    🔧 Lihat nas-fixes.css (untuk upload ke WordPress)
+  </a>
+
+  <div class="files">
+    📂 <b>Struktur folder ini:</b><br>
+    <span>index.html</span> — website utama dengan fix QA<br>
+    <span>assets/</span> — semua CSS, JS, dan gambar<br>
+    <span>assets/nas-fixes.css</span> — file fix QA<br>
+    <span>BUKA WEBSITE NAS.html</span> — halaman ini
+  </div>
+
+  <p class="note">
+    <b>Tips:</b> Buka dengan koneksi internet aktif agar
+    font dan beberapa gambar online tetap tampil.<br><br>
+    Upload <b>nas-fixes.css</b> ke WordPress via<br>
+    <b>Appearance → Customize → Additional CSS</b>
+  </p>
+
+</div>
+</body>
+</html>
